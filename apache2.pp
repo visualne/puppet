@@ -1,6 +1,16 @@
+#Installing apache
 package { "apache2":
     ensure => "installed"
 }
+
+#Installing dpkg-scanpackages which houses the command
+#dpkg-scanpackages which creates gz file that apt-get update will
+#read. PUT ANY PACKAGE you NEED IN THE /var/www/debs/x86_64 directory
+#and then run the dpkg-scanpackages . /dev/null | gzip -9c > /var/www/debs/x86_64/Packages.gz command
+package { "dpkg-dev":
+	ensure => "installed"
+}
+
 
 #Array variable to hold each directory that needs to created.
 $repo_dir = [ "/var/www/debs","/var/www/debs/x86_64"]
