@@ -19,7 +19,7 @@ package { "dpkg-dev":
 $repo_dir = [ "/var/www/debs","/var/www/debs/x86_64"]
 
 #Variable that holds the sed command to be used to add repo to sources.list
-$cmd = "sed -i '1i #Local Repo' /etc/apt/sources.list | sed -i '1i deb http://127.0.0.1/debs x86_64' /etc/apt/sources.list"
+$cmd = "sed -i '1i #Local Repo' /etc/apt/sources.list | sed -i '1i deb http://127.0.0.1/debs/ x86_64/' /etc/apt/sources.list"
 
 
 #Create directory structure
