@@ -6,7 +6,6 @@
 
 ########Installing all packages needed##########
 
-#Installing cobbler,dnsmasq,dhcp,tftp
 package { ["cobbler","dnsmasq","dhcp","tftp"]:
     ensure => "installed"
 }
@@ -14,14 +13,8 @@ package { ["cobbler","dnsmasq","dhcp","tftp"]:
 
 ########chkconfig'ing all services###########
 
-#Cobbler service
-service { "cobblerd":
-  enable => true,
-  require => Package['cobbler']
-}
 
-#http service
-service { ["httpd","dnsmasq","dhcpd","tftp"]:
+service { ["cobblerd","httpd","dnsmasq","dhcpd","tftp"]:
   enable => true,
   require => Package['cobbler']
 }
@@ -31,4 +24,5 @@ service { ["httpd","dnsmasq","dhcpd","tftp"]:
 file { "/etc/cobbler/modules.conf":
   ensure  => file,
   content => template('/root/puppet/cobbler/templates/modules.erb'),
+  require => Package['cobbler']
 }
