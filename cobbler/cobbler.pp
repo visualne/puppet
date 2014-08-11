@@ -13,7 +13,6 @@ package { ["cobbler","dnsmasq","dhcp","tftp"]:
 
 ########chkconfig'ing all services###########
 
-
 service { ["cobblerd","httpd","dnsmasq","dhcpd","tftp"]:
   enable => true,
   require => Package['cobbler']
@@ -21,6 +20,7 @@ service { ["cobblerd","httpd","dnsmasq","dhcpd","tftp"]:
 
 
 ###################Changing all config files for services#############
+
 file { "/etc/cobbler/modules.conf":
   ensure  => file,
   content => template('/root/puppet/cobbler/templates/modules.erb'),
