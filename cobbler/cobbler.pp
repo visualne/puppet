@@ -26,3 +26,11 @@ file { "/etc/cobbler/modules.conf":
   content => template('/root/puppet/cobbler/templates/modules.erb'),
   require => Package['cobbler']
 }
+
+#Need to add variable for server and next_server variable
+file { "/etc/cobbler/settings":
+  ensure  => file,
+  content => template('/root/puppet/cobbler/templates/settings.erb'),
+  require => Package['cobbler']
+}
+
