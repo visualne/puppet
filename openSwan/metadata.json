@@ -1,0 +1,14 @@
+{
+  "name": "openSwan",
+  "version": "0.1.0",
+  "author": "none",
+  "summary": "OpenSwan installer",
+  "license": "Apache 2.0",
+  "source": "https://github.com/visualne/puppet",
+  "issues_url": "https://github.com/visualne/puppet/issues",
+  "project_page": "https://github.com/visualne/puppet",
+  "dependencies": [
+    {"version_requirement":">= 1.0.0","name":"puppetlabs-stdlib"}
+  ]
+}
+

@@ -1,0 +1,21 @@
+conn vpc-to-asa
+	type=tunnel
+        authby=secret
+
+        #LEFT SIDE - AMAZON SIDE#
+        left=<%= @left %>
+        leftid=<%= @elastic_ip %>
+        leftnexthop=<%= @leftnexthop %>
+        leftsubnet=<%= @leftsubnet %>
+        #RIGHT SIDE - SIDE THAT HAS YOUR ASA ON IT#
+        right=<%= @public_ip_of_asa %>
+        #new line below
+        #protostack=klips
+        rightsubnet=<%= @rightsubnet %>
+        esp=<%= @esp %>
+        keyexchange=<%= @keyexchange %>
+        ike=<%= @ike %>
+        salifetime=<%= @salifetime %>
+        pfs=<%= @pfs %>
+        auto=<%= @auto %>
+        dpdaction=<%= @dpdaction %>
