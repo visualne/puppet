@@ -14,17 +14,17 @@ class openSwan {
 
 	$left= "%defaultroute"
 	$elastic_ip = "ELASTIC_IP_OF_INSTANCE"
-        $leftnexthop="%defaultroute"
-        $leftsubnet="SUBNET_THE_VM_IS_IN"
+    $leftnexthop="%defaultroute"
+    $leftsubnet="SUBNET_THE_VM_IS_IN"
 	$public_ip_of_asa="PUBLIC_IP_OF_ASA"
-        $rightsubnet="SUBNET_BEHIND_ASA"
-        $esp="PHASE-2-CONFIGURATION ex)aes256-sha1;modp1024"
-        $keyexchange="KEY_EXCHANGE_METHOD ex)ike"
-        $ike="PHASE-1-CONFIGURATION ex)aes256-sha1;modp1536"
-        $salifetime="SA-LIFETIME ex)28800s"
-        $pfs="PFS ex)yes"
-        $auto="THIS VARIABLE CONTROLLS HOW THE TUNNEL is BROUGHT up 'start' bring its up without interesting traffic ex)start"
-        $dpdaction="GOING TO HAVE TO LOOK THIS ONE UP ex)restart"
+    $rightsubnet="SUBNET_BEHIND_ASA"
+    $esp="PHASE-2-CONFIGURATION ex)aes256-sha1;modp1024"
+    $keyexchange="KEY_EXCHANGE_METHOD ex)ike"
+    $ike="PHASE-1-CONFIGURATION ex)aes256-sha1;modp1536"
+    $salifetime="SA-LIFETIME ex)28800s"
+    $pfs="PFS ex)yes"
+    $auto="THIS VARIABLE CONTROLLS HOW THE TUNNEL is BROUGHT up 'start' bring its up without interesting traffic ex)start"
+    $dpdaction="GOING TO HAVE TO LOOK THIS ONE UP ex)restart"
 	$psk="PRE-SHARED_KEY to use ex)asdj$d34dfjhba!2asjkdfabj"
 	####################################
 
@@ -51,7 +51,7 @@ class openSwan {
     		mode   => 600,
     		owner  => root,
     		group  => root,
-    		source => "/home/ec2-user/puppet/openSwan/files/ipsec.conf"
+    		content => template("openSwan/ipsec.conf.erb"),
 	}
 
 	#Creating the vpc-to-asa.conf file that will hold specific config
@@ -60,7 +60,7 @@ class openSwan {
         	path    => '/etc/ipsec.d/vpc-to-asa.conf',
         	ensure  => file,
         	require => Package['openswan'],
-        	content => template("/home/ec2-user/puppet/openSwan/templates/vpc-to-asa.conf.erb"),
+        	content => template("openSwan/vpc-to-asa.conf.erb"),
       }
 	#Creating vpc-to-asa.secrets file that will house the pre-shared key 
 	#and endpoints of the tunnel.
@@ -68,7 +68,7 @@ class openSwan {
                 path    => '/etc/ipsec.d/vpc-to-asa.secrets',
                 ensure  => file,
                 require => Package['openswan'],
-                content => template("/home/ec2-user/puppet/openSwan/templates/vpc-to-asa.secrets.erb"),
+                content => template("openSwan/vpc-to-asa.secrets.erb"),
       }
 
 	#Starting and chkconfig'ing the ipsec service
