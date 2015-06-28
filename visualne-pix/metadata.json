@@ -1,0 +1,14 @@
+{
+  "name": "visualne-pix",
+  "version": "0.1.0",
+  "author": "visualne",
+  "summary": "Creating kickstart server",
+  "license": "Apache 2.0",
+  "source": "https://github.com/visualne/puppet",
+  "project_page": "https://github.com/visualne/puppet",
+  "issues_url": "https://github.com/visualne/puppet/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
