@@ -53,6 +53,16 @@ class pix {
         content => template('visualne-pix/dhcpd.erb'),
       }
 
+    #Changing configuration associated with xinetd/tftp server
+    file { "tftp":
+        path    => "/etc/xinetd.d/tftp",
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        require => File['dhcpd.conf'],
+        content => template('visualne-pix/tftp.erb'),
+      }
+
 }
 
 include pix
