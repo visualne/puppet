@@ -1,0 +1,47 @@
+#platform=x86, AMD64, or Intel EM64T
+#version=DEVEL
+# Firewall configuration
+firewall --disabled
+# Install OS instead of upgrade
+install
+# Use FTP installation media
+url --url="ftp://<%= @ftp_server_ip %>/pub/"
+#Network information
+network --bootproto=dhcp --device=eth0 --onboot=on
+network --bootproto=dhcp --device=eth1 --onboot=on
+# Root password
+rootpw <%= @kickstartPassword %>
+# System authorization information
+auth  useshadow  passalgo=sha512
+# Use graphical install
+graphical
+firstboot disable
+# System keyboard
+keyboard us
+# System language
+lang en_US
+# SELinux configuration
+selinux disabled
+# Installation logging level
+logging level=info
+# System timezone
+timezone Europe/Amsterdam
+# System bootloader configuration
+bootloader location=mbr
+clearpart --all --initlabel
+part swap --asprimary --fstype="swap" --size=1024
+part /boot --fstype ext4 --size=200
+part pv.01 --size=1 --grow
+volgroup rootvg01 pv.01
+logvol / --fstype ext4 --name=lv01 --vgname=rootvg01 --size=1 --grow
+
+%packages
+@core
+wget
+net-tools
+%end
+%post
+%end
+
+#Reboot
+reboot

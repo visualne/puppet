@@ -1,0 +1,10 @@
+default menu.c32
+prompt 0
+timeout 30
+MENU TITLE visualne.wordpress.com PXE Menu
+
+LABEL cent7.0_x64
+MENU LABEL CentOS 7.0 X64
+KERNEL /netboot/vmlinuz
+APPEND  initrd=/netboot/initrd.img ksdevice=bootif inst.repo=ftp://<%= @ftp_server_ip %>/pub ks=ftp://<%= @ftp_server_ip %>/pub/ks.cfg
+IPAPPEND 2
